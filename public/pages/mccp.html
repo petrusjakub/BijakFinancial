@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCCP - Manulife Critical Care Protection | PastiJaga</title>
+  <meta name="description" content="MCCP Manulife Critical Care Protection: Asuransi penyakit kritis yang melindungi 150 penyakit kritis hingga usia 85 tahun. Tanpa survival period, klaim langsung setelah diagnosis.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/assets/style.css">
+  <script>
+    (function(){var t=localStorage.getItem('pcTheme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark');})();
+  </script>
+  <style>
+    :root {
+      --mccp-green: #00875A;
+      --mccp-dark: #005C3D;
+      --mccp-light: #00C978;
+    }
+
+    .mccp-hero {
+      background: linear-gradient(135deg, #E8F5EE 0%, #D5F5E3 50%, #F0FFF7 100%);
+      padding: var(--sp-16) 0;
+      position: relative;
+      overflow: hidden;
+    }
+    html.dark .mccp-hero {
+      background: linear-gradient(135deg, #0A1E14 0%, #0D2B1A 100%);
+    }
+    .mccp-hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(0,135,90,0.08) 0%, transparent 70%);
+    }
+    .mccp-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      background: rgba(0,135,90,0.1);
+      border: 1px solid rgba(0,135,90,0.2);
+      color: var(--mccp-green);
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: var(--r-full);
+      margin-bottom: var(--sp-4);
+    }
+    html.dark .mccp-badge {
+      background: rgba(0,201,120,0.15);
+      border-color: rgba(0,201,120,0.3);
+      color: var(--mccp-light);
+    }
+    .mccp-hero h1 span { color: var(--mccp-green); }
+    html.dark .mccp-hero h1 span { color: var(--mccp-light); }
+    .mccp-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: var(--sp-3);
+      margin-bottom: var(--sp-8);
+    }
+    .mccp-stat {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: var(--sp-3) var(--sp-4);
+      text-align: center;
+    }
+    .mccp-stat-value {
+      font-family: var(--ff-head);
+      font-weight: 800;
+      font-size: var(--fs-lg);
+      color: var(--mccp-green);
+    }
+    html.dark .mccp-stat-value { color: var(--mccp-light); }
+    .mccp-stat-label {
+      font-size: var(--fs-xs);
+      color: var(--txt-muted);
+      margin-top: 2px;
+    }
+
+    /* Advantage Grid */
+    .advantage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--sp-5);
+    }
+    .advantage-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--sp-5);
+      transition: all var(--ease);
+    }
+    .advantage-card:hover { box-shadow: var(--sh-md); transform: translateY(-2px); }
+    .advantage-icon { font-size: 28px; margin-bottom: var(--sp-3); }
+    .advantage-title { font-weight: 700; color: var(--txt-head); margin-bottom: var(--sp-2); font-size: var(--fs-sm); }
+    .advantage-desc { font-size: var(--fs-sm); color: var(--txt-sub); line-height: 1.6; }
+
+    /* Plan Comparison Cards */
+    .plan-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--sp-5);
+    }
+    .plan-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--sp-6);
+      transition: all var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+    .plan-card:hover { border-color: var(--mccp-green); box-shadow: var(--sh-md); transform: translateY(-2px); }
+    html.dark .plan-card:hover { border-color: var(--mccp-light); }
+    .plan-card-header {
+      text-align: center;
+      padding-bottom: var(--sp-4);
+      margin-bottom: var(--sp-4);
+      border-bottom: 2px solid var(--border);
+    }
+    .plan-card-title {
+      font-size: var(--fs-lg);
+      font-weight: 800;
+      color: var(--mccp-green);
+      margin-bottom: var(--sp-1);
+    }
+    html.dark .plan-card-title { color: var(--mccp-light); }
+    .plan-card-subtitle {
+      font-size: var(--fs-xs);
+      color: var(--txt-muted);
+    }
+    .plan-card ul {
+      list-style: none;
+      padding: 0;
+    }
+    .plan-card ul li {
+      padding: var(--sp-2) 0;
+      font-size: var(--fs-sm);
+      color: var(--txt-sub);
+      line-height: 1.6;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-2);
+    }
+    .plan-card ul li:last-child { border-bottom: none; }
+    .plan-card ul li::before {
+      content: '\2713';
+      color: var(--mccp-green);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    html.dark .plan-card ul li::before { color: var(--mccp-light); }
+
+    /* Premium Table */
+    .premi-table-wrap {
+      overflow-x: auto;
+      margin-top: var(--sp-4);
+      border-radius: var(--r-lg);
+      border: 1px solid var(--border);
+    }
+    .premi-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--fs-sm);
+    }
+    .premi-table th {
+      background: var(--mccp-green);
+      color: #fff;
+      padding: 12px 14px;
+      text-align: center;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    html.dark .premi-table th { background: var(--mccp-dark); }
+    .premi-table td {
+      padding: 10px 14px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      color: var(--txt-sub);
+    }
+    .premi-table tr:last-child td { border-bottom: none; }
+    .premi-table tr:hover td { background: rgba(0,135,90,0.04); }
+    html.dark .premi-table tr:hover td { background: rgba(0,201,120,0.06); }
+
+    /* CTA */
+    .mccp-cta {
+      background: linear-gradient(135deg, var(--mccp-dark), var(--mccp-green), var(--mccp-light));
+    }
+
+    /* Section tag override */
+    .mccp-section-tag {
+      background: rgba(0,135,90,0.1) !important;
+      color: var(--mccp-green) !important;
+    }
+    html.dark .mccp-section-tag {
+      background: rgba(0,201,120,0.15) !important;
+      color: var(--mccp-light) !important;
+    }
+
+    /* Button overrides */
+    .mccp-btn-primary {
+      background: var(--mccp-green) !important;
+      color: #fff !important;
+      box-shadow: 0 4px 14px rgba(0,135,90,0.3);
+    }
+    .mccp-btn-primary:hover { background: var(--mccp-dark) !important; }
+    .mccp-btn-outline {
+      border-color: var(--mccp-green) !important;
+      color: var(--mccp-green) !important;
+    }
+    html.dark .mccp-btn-outline {
+      border-color: var(--mccp-light) !important;
+      color: var(--mccp-light) !important;
+    }
+
+    /* Medical requirements */
+    .med-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: var(--fs-sm);
+      margin-top: var(--sp-3);
+    }
+    .med-table th {
+      background: var(--mccp-green);
+      color: #fff;
+      padding: 10px 12px;
+      text-align: center;
+      font-weight: 600;
+    }
+    html.dark .med-table th { background: var(--mccp-dark); }
+    .med-table td {
+      padding: 8px 12px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      color: var(--txt-sub);
+      font-size: var(--fs-xs);
+    }
+    .med-table tr:hover td { background: rgba(0,135,90,0.04); }
+    html.dark .med-table tr:hover td { background: rgba(0,201,120,0.06); }
+
+    /* Calculator Result Box */
+    .calc-result-box {
+      margin-top: var(--sp-5);
+      padding: var(--sp-5);
+      background: rgba(0,135,90,0.04);
+      border-radius: var(--r-md);
+      border: 1px solid rgba(0,135,90,0.12);
+    }
+    html.dark .calc-result-box {
+      background: rgba(0,201,120,0.08);
+      border-color: rgba(0,201,120,0.2);
+    }
+    .calc-mode-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: var(--sp-3);
+      margin-top: var(--sp-4);
+    }
+    .calc-mode-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: var(--sp-3);
+      text-align: center;
+    }
+    .calc-mode-label {
+      font-size: var(--fs-xs);
+      color: var(--txt-muted);
+      margin-bottom: 4px;
+    }
+    .calc-mode-value {
+      font-size: var(--fs-md);
+      font-weight: 700;
+      color: var(--mccp-green);
+    }
+    html.dark .calc-mode-value { color: var(--mccp-light); }
+    .calc-premium-main {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 800;
+      color: var(--mccp-green);
+      text-align: center;
+      margin: var(--sp-3) 0;
+    }
+    html.dark .calc-premium-main { color: var(--mccp-light); }
+    .calc-na-msg {
+      background: rgba(211, 47, 47, 0.06);
+      border: 1px solid rgba(211, 47, 47, 0.2);
+      border-radius: var(--r-md);
+      padding: var(--sp-4);
+      text-align: center;
+      color: #d32f2f;
+      font-weight: 600;
+      margin-top: var(--sp-4);
+      display: none;
+    }
+    html.dark .calc-na-msg {
+      background: rgba(239, 83, 80, 0.1);
+      border-color: rgba(239, 83, 80, 0.3);
+      color: #ef5350;
+    }
+    .calc-warning-msg {
+      background: rgba(255, 152, 0, 0.06);
+      border: 1px solid rgba(255, 152, 0, 0.2);
+      border-radius: var(--r-md);
+      padding: var(--sp-3);
+      text-align: center;
+      color: #e65100;
+      font-size: var(--fs-xs);
+      margin-top: var(--sp-3);
+      display: none;
+    }
+    html.dark .calc-warning-msg {
+      background: rgba(255, 152, 0, 0.1);
+      border-color: rgba(255, 152, 0, 0.3);
+      color: #FFB74D;
+    }
+    .calc-profile-summary {
+      background: rgba(0,135,90,0.06);
+      border-radius: var(--r-md);
+      padding: var(--sp-3);
+      margin-bottom: var(--sp-3);
+      font-size: var(--fs-xs);
+      color: var(--txt-sub);
+      text-align: center;
+    }
+    html.dark .calc-profile-summary { background: rgba(0,201,120,0.08); }
+  </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<!-- HERO -->
+<section class="mccp-hero" aria-labelledby="mccp-title">
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="/index.html">Beranda</a>
+      <span class="breadcrumb-sep">&#8250;</span>
+      <a href="/index.html#produk">Produk</a>
+      <span class="breadcrumb-sep">&#8250;</span>
+      <span class="breadcrumb-current" style="color:var(--mccp-green)">MCCP</span>
+    </nav>
+
+    <div class="page-hero-inner">
+      <div>
+        <div class="mccp-badge">
+          &#128737; Manulife Critical Care Protection
+        </div>
+
+        <h1 id="mccp-title" style="font-size:clamp(1.7rem,3vw,2.4rem);color:var(--txt-head);line-height:1.25;margin-bottom:var(--sp-5)" class="fade-up">
+          Apakah Anda Siap Menghadapi <span class="kw-cta">Biaya Ratusan Juta</span> Jika Tiba-tiba Terdiagnosis <span class="kw">Penyakit Kritis</span>?
+        </h1>
+
+        <p style="font-size:var(--fs-md);color:var(--txt-sub);margin-bottom:var(--sp-6);line-height:1.7" class="fade-up stagger-1">
+          <strong>MCCP (Manulife Critical Care Protection)</strong> melindungi Anda dari <span class="kw">150 penyakit kritis</span> hingga <span class="kw">usia 85 tahun</span>. <span class="kw-cta">Tanpa survival period</span> - klaim langsung setelah diagnosis. Jika sehat hingga 85, dapatkan <span class="kw-gold">100% Uang Pertanggungan</span> kembali.
+        </p>
+
+        <div class="mccp-stat-grid fade-up stagger-2">
+          <div class="mccp-stat">
+            <div class="mccp-stat-value">150</div>
+            <div class="mccp-stat-label">Penyakit Kritis Dilindungi</div>
+          </div>
+          <div class="mccp-stat">
+            <div class="mccp-stat-value">Usia 85</div>
+            <div class="mccp-stat-label">Masa Perlindungan</div>
+          </div>
+          <div class="mccp-stat">
+            <div class="mccp-stat-value">0 Hari</div>
+            <div class="mccp-stat-label">Survival Period</div>
+          </div>
+          <div class="mccp-stat">
+            <div class="mccp-stat-value">100% UP</div>
+            <div class="mccp-stat-label">End of Term Benefit</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:var(--sp-3);flex-wrap:wrap" class="fade-up stagger-3">
+          <a href="https://wa.me/6287781896087?text=Halo%20Kak%2C%20aku%20mau%20tanya%20soal%20MCCP%20Manulife"
+             target="_blank" rel="noopener" class="btn btn--lg mccp-btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Tanya Produk MCCP
+          </a>
+          <a href="#kalkulator" class="btn btn--outline btn--lg mccp-btn-outline">Hitung Premi</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT INFO -->
+<section class="section">
+  <div class="container">
+    <span class="mccp-section-tag" style="display:inline-block;padding:4px 12px;border-radius:var(--r-full);font-size:var(--fs-xs);font-weight:700;margin-bottom:var(--sp-3)">Tentang Produk</span>
+    <h2 style="font-size:var(--fs-xl);color:var(--txt-head);margin-bottom:var(--sp-3)" class="fade-up">
+      Tahukah Anda Bahwa <span class="kw">1 dari 3 Orang</span> Akan Mengalami Penyakit Kritis?
+    </h2>
+    <p style="font-size:var(--fs-md);color:var(--txt-sub);margin-bottom:var(--sp-6);line-height:1.7;max-width:800px" class="fade-up stagger-1">
+      Bagaimana jika ada produk yang <span class="kw-cta">melindungi</span> Anda dari <span class="kw">150 penyakit kritis</span> hingga <span class="kw">usia 85 tahun</span>, <span class="kw-cta">tanpa survival period</span>, dan tetap mengembalikan <span class="kw-gold">100% Uang Pertanggungan</span> jika Anda sehat hingga akhir? Itulah <strong>MCCP</strong>.
+    </p>
+
+    <div class="advantage-grid fade-up stagger-2">
+      <div class="advantage-card">
+        <div class="advantage-icon">&#128737;</div>
+        <div class="advantage-title">150 Penyakit Kritis</div>
+        <div class="advantage-desc">Mencakup <span class="kw">85 penyakit tahap lanjut</span> + <span class="kw">65 penyakit tahap awal</span> (Plan 2). Perlindungan terlengkap di kelasnya.</div>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-icon">&#9889;</div>
+        <div class="advantage-title">Tanpa Survival Period</div>
+        <div class="advantage-desc">Tidak perlu menunggu setelah diagnosis. <span class="kw-cta">Klaim langsung diproses</span> begitu diagnosis dikonfirmasi dokter.</div>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-icon">&#127775;</div>
+        <div class="advantage-title">End of Term Benefit</div>
+        <div class="advantage-desc">Jika sehat hingga usia 85, terima <span class="kw-gold">100% UP + Tambahan Nilai Tunai</span>. Premi Anda tidak hilang.</div>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-icon">&#128176;</div>
+        <div class="advantage-title">Pilihan MPP Fleksibel</div>
+        <div class="advantage-desc">Bayar premi 10, 15, 20 tahun, atau Regular Premium sampai usia 85. Sesuaikan dengan kemampuan finansial Anda.</div>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-icon">&#128100;</div>
+        <div class="advantage-title">Usia Masuk 30 Hari - 60 Tahun</div>
+        <div class="advantage-desc">Bisa diambil untuk anak sejak 30 hari lahir hingga usia 60 tahun. Semakin muda, semakin murah preminya.</div>
+      </div>
+      <div class="advantage-card">
+        <div class="advantage-icon">&#128154;</div>
+        <div class="advantage-title">Cancer UP Renewal (Plan 2)</div>
+        <div class="advantage-desc">UP dipulihkan 25% jika terdiagnosis kanker. Manfaat <span class="kw-gold">tambahan</span> yang tidak mengurangi UP tersisa.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAN COMPARISON -->
+<section class="section section--alt">
+  <div class="container">
+    <span class="mccp-section-tag" style="display:inline-block;padding:4px 12px;border-radius:var(--r-full);font-size:var(--fs-xs);font-weight:700;margin-bottom:var(--sp-3)">Perbandingan Plan</span>
+    <h2 style="font-size:var(--fs-xl);color:var(--txt-head);margin-bottom:var(--sp-3)" class="fade-up">
+      Bagaimana Jika Anda Bisa Memilih Level <span class="kw-cta">Proteksi</span> yang Sesuai Kebutuhan?
+    </h2>
+    <p style="font-size:var(--fs-md);color:var(--txt-sub);margin-bottom:var(--sp-6);line-height:1.7;max-width:800px" class="fade-up stagger-1">
+      MCCP tersedia dalam 2 pilihan plan. Mana yang lebih cocok untuk Anda?
+    </p>
+
+    <div class="plan-grid fade-up stagger-2">
+      <div class="plan-card">
+        <div class="plan-card-header">
+          <div class="plan-card-title">Plan 1 - Basic</div>
+          <div class="plan-card-subtitle">Perlindungan Penyakit Kritis Tahap Lanjut</div>
+        </div>
+        <ul>
+          <li><strong>85 penyakit kritis</strong> tahap lanjut (100% UP)</li>
+          <li>Manfaat Meninggal Dunia (100% UP + Tambahan UP)</li>
+          <li>Manfaat Angioplasty (25% UP, maks 250 juta)</li>
+          <li>End of Term Benefit di usia 85 (100% UP + Bonus)</li>
+          <li>MPP: 10, 15, 20 tahun, atau Regular Premium</li>
+          <li>Premi lebih terjangkau</li>
+          <li>Cocok: sudah punya asuransi untuk penyakit ringan</li>
+        </ul>
+      </div>
+      <div class="plan-card" style="border-color:var(--mccp-green)">
+        <div class="plan-card-header">
+          <div class="plan-card-title">Plan 2 - Complete</div>
+          <div class="plan-card-subtitle">Perlindungan Tahap Awal + Lanjut + ICU</div>
+        </div>
+        <ul>
+          <li><strong>150 penyakit kritis</strong> (65 tahap awal + 85 lanjut)</li>
+          <li>Semua manfaat Plan 1</li>
+          <li>Penyakit Kritis Tahap Awal: 65 jenis (25% UP, maks 1.5M)</li>
+          <li>Manfaat ICU/ICCU/PICU (ventilator 120 jam, 25% UP)</li>
+          <li>Cancer UP Renewal (25% UP, maks 1.5M, additional)</li>
+          <li>Perlindungan paling lengkap dari tahap paling awal</li>
+          <li>Cocok: riwayat keluarga penyakit kritis</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIUM TABLE -->
+<section class="section">
+  <div class="container">
+    <span class="mccp-section-tag" style="display:inline-block;padding:4px 12px;border-radius:var(--r-full);font-size:var(--fs-xs);font-weight:700;margin-bottom:var(--sp-3)">Tabel Premi</span>
+    <h2 style="font-size:var(--fs-xl);color:var(--txt-head);margin-bottom:var(--sp-3)" class="fade-up">
+      Berapa <span class="kw-gold">Investasi</span> untuk Melindungi Diri dari Penyakit Kritis?
+    </h2>
+    <p style="font-size:var(--fs-md);color:var(--txt-sub);margin-bottom:var(--sp-6);line-height:1.7;max-width:800px" class="fade-up stagger-1">
+      Contoh premi tahunan UP 1 Miliar (dalam Juta Rupiah/tahun). Gunakan kalkulator untuk simulasi lengkap.
+    </p>
+
+    <h3 style="font-size:var(--fs-md);color:var(--txt-head);margin-bottom:var(--sp-2)">Plan 1 - Pria, UP 1 Miliar</h3>
+    <div class="premi-table-wrap fade-up">
+      <table class="premi-table">
+        <tr><th>Usia</th><th>MPP 10</th><th>MPP 15</th><th>MPP 20</th><th>Regular Premium</th></tr>
+        <tr><td>25 thn</td><td>26.2 Juta</td><td>19.3 Juta</td><td>15.7 Juta</td><td>12.2 Juta</td></tr>
+        <tr><td>30 thn</td><td>32.4 Juta</td><td>23.9 Juta</td><td>19.5 Juta</td><td>15.5 Juta</td></tr>
+        <tr><td>35 thn</td><td>40.8 Juta</td><td>30.2 Juta</td><td>24.8 Juta</td><td>20.4 Juta</td></tr>
+        <tr><td>40 thn</td><td>48.9 Juta</td><td>36.3 Juta</td><td>29.6 Juta</td><td>25.0 Juta</td></tr>
+        <tr><td>45 thn</td><td>57.0 Juta</td><td>42.4 Juta</td><td>34.5 Juta</td><td>29.6 Juta</td></tr>
+        <tr><td>50 thn</td><td>66.1 Juta</td><td>53.1 Juta</td><td>46.3 Juta</td><td>41.8 Juta</td></tr>
+      </table>
+    </div>
+
+    <h3 style="font-size:var(--fs-md);color:var(--txt-head);margin-top:var(--sp-6);margin-bottom:var(--sp-2)">Plan 2 - Pria, UP 1 Miliar</h3>
+    <div class="premi-table-wrap fade-up stagger-1">
+      <table class="premi-table">
+        <tr><th>Usia</th><th>MPP 10</th><th>MPP 15</th><th>MPP 20</th><th>Regular Premium</th></tr>
+        <tr><td>25 thn</td><td>27.9 Juta</td><td>20.6 Juta</td><td>16.8 Juta</td><td>13.6 Juta</td></tr>
+        <tr><td>30 thn</td><td>34.6 Juta</td><td>25.5 Juta</td><td>20.8 Juta</td><td>17.4 Juta</td></tr>
+        <tr><td>35 thn</td><td>43.6 Juta</td><td>32.2 Juta</td><td>26.4 Juta</td><td>23.0 Juta</td></tr>
+        <tr><td>40 thn</td><td>52.2 Juta</td><td>38.7 Juta</td><td>31.6 Juta</td><td>28.2 Juta</td></tr>
+        <tr><td>45 thn</td><td>60.9 Juta</td><td>45.2 Juta</td><td>36.8 Juta</td><td>33.5 Juta</td></tr>
+        <tr><td>50 thn</td><td>70.6 Juta</td><td>56.7 Juta</td><td>49.5 Juta</td><td>45.6 Juta</td></tr>
+      </table>
+    </div>
+
+    <h3 style="font-size:var(--fs-md);color:var(--txt-head);margin-top:var(--sp-6);margin-bottom:var(--sp-2)">Plan 1 - Wanita, UP 1 Miliar</h3>
+    <div class="premi-table-wrap fade-up stagger-1">
+      <table class="premi-table">
+        <tr><th>Usia</th><th>MPP 10</th><th>MPP 15</th><th>MPP 20</th><th>Regular Premium</th></tr>
+        <tr><td>25 thn</td><td>24.3 Juta</td><td>16.6 Juta</td><td>14.1 Juta</td><td>11.2 Juta</td></tr>
+        <tr><td>30 thn</td><td>29.5 Juta</td><td>20.2 Juta</td><td>17.2 Juta</td><td>13.9 Juta</td></tr>
+        <tr><td>35 thn</td><td>36.3 Juta</td><td>24.8 Juta</td><td>21.2 Juta</td><td>17.7 Juta</td></tr>
+        <tr><td>40 thn</td><td>42.3 Juta</td><td>28.7 Juta</td><td>24.7 Juta</td><td>20.2 Juta</td></tr>
+        <tr><td>45 thn</td><td>48.4 Juta</td><td>32.7 Juta</td><td>28.2 Juta</td><td>22.8 Juta</td></tr>
+        <tr><td>50 thn</td><td>56.6 Juta</td><td>42.6 Juta</td><td>37.8 Juta</td><td>29.7 Juta</td></tr>
+      </table>
+    </div>
+
+    <h3 style="font-size:var(--fs-md);color:var(--txt-head);margin-top:var(--sp-6);margin-bottom:var(--sp-2)">Plan 2 - Wanita, UP 1 Miliar</h3>
+    <div class="premi-table-wrap fade-up stagger-1">
+      <table class="premi-table">
+        <tr><th>Usia</th><th>MPP 10</th><th>MPP 15</th><th>MPP 20</th><th>Regular Premium</th></tr>
+        <tr><td>25 thn</td><td>26.8 Juta</td><td>18.3 Juta</td><td>15.6 Juta</td><td>12.2 Juta</td></tr>
+        <tr><td>30 thn</td><td>32.7 Juta</td><td>22.3 Juta</td><td>19.0 Juta</td><td>15.2 Juta</td></tr>
+        <tr><td>35 thn</td><td>40.1 Juta</td><td>27.5 Juta</td><td>23.5 Juta</td><td>19.3 Juta</td></tr>
+        <tr><td>40 thn</td><td>46.6 Juta</td><td>31.7 Juta</td><td>27.2 Juta</td><td>23.0 Juta</td></tr>
+        <tr><td>45 thn</td><td>53.0 Juta</td><td>35.8 Juta</td><td>30.9 Juta</td><td>26.6 Juta</td></tr>
+        <tr><td>50 thn</td><td>61.4 Juta</td><td>46.3 Juta</td><td>41.1 Juta</td><td>33.1 Juta</td></tr>
+      </table>
+    </div>
+
+    <p style="font-size:var(--fs-xs);color:var(--txt-muted);margin-top:var(--sp-4);font-style:italic">
+      * Tabel di atas adalah contoh untuk UP 1 Miliar. Gunakan kalkulator di bawah untuk simulasi UP dan usia lainnya.
+    </p>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="section section--alt" id="kalkulator">
+  <div class="container">
+    <span class="mccp-section-tag" style="display:inline-block;padding:4px 12px;border-radius:var(--r-full);font-size:var(--fs-xs);font-weight:700;margin-bottom:var(--sp-3)">Kalkulator Premi</span>
+    <h2 style="font-size:var(--fs-xl);color:var(--txt-head);margin-bottom:var(--sp-3)" class="fade-up">
+      Berapa <span class="kw-gold">Premi</span> MCCP untuk Profil Anda?
+    </h2>
+    <p style="font-size:var(--fs-md);color:var(--txt-sub);margin-bottom:var(--sp-6);line-height:1.7;max-width:800px" class="fade-up stagger-1">
+      Pilih parameter di bawah untuk melihat estimasi premi Anda secara instan. Data langsung dari tabel premi resmi MCCP.
+    </p>
+
+    <div class="calculator-wrap fade-up stagger-2">
+      <div class="calc-header">
+        <h3 class="calc-header-title">Simulasi Premi MCCP</h3>
+      </div>
+      <div class="calc-body">
+        <div class="calc-grid">
+          <div class="form-group">
+            <label class="form-label" for="mccp-plan">Plan</label>
+            <select class="form-select" id="mccp-plan" onchange="mccpCalc()">
+              <option value="1">Plan 1 - Basic (85 Penyakit Kritis)</option>
+              <option value="2">Plan 2 - Complete (150 Penyakit Kritis)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="mccp-gender">Jenis Kelamin</label>
+            <select class="form-select" id="mccp-gender" onchange="mccpCalc()">
+              <option value="pria">Pria</option>
+              <option value="wanita">Wanita</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="mccp-age">Usia Masuk</label>
+            <select class="form-select" id="mccp-age" onchange="mccpCalc()">
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="mccp-mpp">Masa Bayar Premi (MPP)</label>
+            <select class="form-select" id="mccp-mpp" onchange="mccpCalc()">
+              <option value="10">10 Tahun</option>
+              <option value="15">15 Tahun</option>
+              <option value="20">20 Tahun</option>
+              <option value="RP">Regular Premium (Sampai Usia 85)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="mccp-up">Uang Pertanggungan (UP)</label>
+            <select class="form-select" id="mccp-up" onchange="mccpCalc()">
+              <option value="0.5M">500 Juta</option>
+              <option value="1M" selected>1 Miliar</option>
+              <option value="1.5M">1.5 Miliar</option>
+              <option value="2M">2 Miliar</option>
+              <option value="2.5M">2.5 Miliar</option>
+              <option value="5M">5 Miliar</option>
+              <option value="10M">10 Miliar</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="calc-result" id="mccp-result">
+          <div class="calc-profile-summary" id="mccp-profile"></div>
+          <div class="calc-premium-main" id="mccp-premium">-</div>
+          <p style="text-align:center;font-size:var(--fs-sm);color:var(--txt-sub);margin-bottom:var(--sp-3)" id="mccp-detail">Pilih semua parameter untuk melihat hasil</p>
+          <div class="calc-mode-grid" id="mccp-modes" style="display:none">
+            <div class="calc-mode-card">
+              <div class="calc-mode-label">Tahunan (1x)</div>
+              <div class="calc-mode-value" id="mccp-mode-tahunan">-</div>
+            </div>
+            <div class="calc-mode-card">
+              <div class="calc-mode-label">Semesteran (x 0.52)</div>
+              <div class="calc-mode-value" id="mccp-mode-semesteran">-</div>
+            </div>
+            <div class="calc-mode-card">
+              <div class="calc-mode-label">Kuartalan (x 0.27)</div>
+              <div class="calc-mode-value" id="mccp-mode-kuartalan">-</div>
+            </div>
+            <div class="calc-mode-card">
+              <div class="calc-mode-label">Bulanan (x 0.09)</div>
+              <div class="calc-mode-value" id="mccp-mode-bulanan">-</div>
+            </div>
+          </div>
+          <div class="calc-na-msg" id="mccp-na">Kombinasi ini <strong>Tidak Tersedia</strong>. Silakan pilih UP atau parameter lain.</div>
+          <div class="calc-warning-msg" id="mccp-warning">Premi di bawah minimum Rp 5 Juta/tahun. Pertimbangkan untuk menaikkan UP atau memilih MPP yang lebih pendek.</div>
+        </div>
+        <p style="font-size:var(--fs-xs);color:var(--txt-muted);margin-top:var(--sp-3);font-style:italic;text-align:center">
+          * Estimasi berdasarkan tabel premi resmi MCCP. Untuk ilustrasi resmi, silakan hubungi kami.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEDICAL REQUIREMENTS -->
+<section class="section">
+  <div class="container">
+    <span class="mccp-section-tag" style="display:inline-block;padding:4px 12px;border-radius:var(--r-full);font-size:var(--fs-xs);font-weight:700;margin-bottom:var(--sp-3)">Persyaratan Medis</span>
+    <h2 style="font-size:var(--fs-xl);color:var(--txt-head);margin-bottom:var(--sp-3)" class="fade-up">
+      Apakah Perlu <span class="kw-cta">Medical Check-Up</span> untuk Mendaftar?
+    </h2>
+    <p style="font-size:var(--fs-md);color:var(--txt-sub);margin-bottom:var(--sp-6);line-height:1.7;max-width:800px" class="fade-up stagger-1">
+      Persyaratan medis bergantung pada usia dan jumlah Uang Pertanggungan yang dipilih. Semakin muda dan semakin rendah UP, semakin mudah prosesnya.
+    </p>
+
+    <div class="premi-table-wrap fade-up stagger-2">
+      <table class="med-table">
+        <tr>
+          <th>Usia</th>
+          <th>UP &le; 500 Juta</th>
+          <th>UP 500 Juta - 1.5 M</th>
+          <th>UP 1.5 M - 3 M</th>
+          <th>UP &gt; 3 M</th>
+        </tr>
+        <tr>
+          <td>0 - 17 tahun</td>
+          <td>Non-Medical</td>
+          <td>Non-Medical</td>
+          <td>Darah + Urine</td>
+          <td>Full Medical</td>
+        </tr>
+        <tr>
+          <td>18 - 35 tahun</td>
+          <td>Non-Medical</td>
+          <td>Non-Medical</td>
+          <td>Darah + Urine</td>
+          <td>Full Medical</td>
+        </tr>
+        <tr>
+          <td>36 - 45 tahun</td>
+          <td>Non-Medical</td>
+          <td>Darah + Urine</td>
+          <td>Darah + Urine + EKG</td>
+          <td>Full Medical</td>
+        </tr>
+        <tr>
+          <td>46 - 55 tahun</td>
+          <td>Darah + Urine</td>
+          <td>Darah + Urine + EKG</td>
+          <td>Full Medical</td>
+          <td>Full Medical</td>
+        </tr>
+        <tr>
+          <td>56 - 60 tahun</td>
+          <td>Darah + Urine</td>
+          <td>Full Medical</td>
+          <td>Full Medical</td>
+          <td>Full Medical</td>
+        </tr>
+      </table>
+    </div>
+    <p style="font-size:var(--fs-xs);color:var(--txt-muted);margin-top:var(--sp-3);font-style:italic">
+      * Non-Medical = cukup mengisi formulir SPAJ tanpa pemeriksaan medis. Full Medical = pemeriksaan darah, urine, EKG, dan pemeriksaan fisik lengkap. Biaya medical ditanggung Manulife.
+    </p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section section--alt">
+  <div class="container">
+    <span class="mccp-section-tag" style="display:inline-block;padding:4px 12px;border-radius:var(--r-full);font-size:var(--fs-xs);font-weight:700;margin-bottom:var(--sp-3)">FAQ</span>
+    <h2 style="font-size:var(--fs-xl);color:var(--txt-head);margin-bottom:var(--sp-6)" class="fade-up">
+      Pertanyaan yang Sering Diajukan
+    </h2>
+
+    <div class="faq-list fade-up stagger-1">
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-question">Apa itu MCCP (Manulife Critical Care Protection)?</span>
+          <span class="faq-icon">&#43;</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">MCCP adalah produk asuransi penyakit kritis dari Manulife Indonesia yang memberikan perlindungan terhadap penyakit kritis dari tahap awal hingga tahap lanjut. Masa perlindungan hingga usia 85 tahun, dengan pilihan Plan 1 (Basic) yang melindungi 85 penyakit kritis tahap lanjut, atau Plan 2 (Complete) yang melindungi 150 penyakit kritis (tahap awal + lanjut).</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-question">Apa perbedaan Plan 1 dan Plan 2?</span>
+          <span class="faq-icon">&#43;</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">Plan 1 (Basic) melindungi 85 penyakit kritis tahap lanjut dengan manfaat: Meninggal Dunia, Penyakit Kritis Lanjut, Angioplasty, dan End of Term Benefit. Plan 2 (Complete) mencakup semua manfaat Plan 1 ditambah: 65 penyakit kritis tahap awal, Manfaat ICU/ICCU/PICU, dan Cancer UP Renewal. Total melindungi 150 penyakit. Premi Plan 2 sedikit lebih tinggi, tetapi perlindungannya jauh lebih lengkap.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-question">Penyakit apa saja yang dilindungi MCCP?</span>
+          <span class="faq-icon">&#43;</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">MCCP melindungi berbagai penyakit kritis termasuk: semua jenis kanker ganas, serangan jantung, stroke, gagal ginjal, transplantasi organ, tumor otak, kebutaan, ketulian, koma, Alzheimer, Parkinson, dan masih banyak lagi. Plan 2 juga melindungi penyakit tahap awal seperti kanker in situ, penyakit arteri koroner awal, dan TIA (stroke ringan).</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-question">Apakah ada Survival Period di MCCP?</span>
+          <span class="faq-icon">&#43;</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">Tidak ada Survival Period di MCCP. Ini adalah salah satu keunggulan utama produk ini. Di banyak produk CI lain, setelah diagnosis Anda harus bertahan hidup 14-30 hari sebelum klaim dibayar. Di MCCP, begitu diagnosis dikonfirmasi oleh dokter, klaim bisa langsung diproses tanpa harus menunggu.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-question">Apa itu Periode Eliminasi 90 hari?</span>
+          <span class="faq-icon">&#43;</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">Periode eliminasi adalah masa tunggu 90 hari sejak tanggal polis aktif. Selama periode ini, jika terdiagnosis penyakit kritis (bukan karena kecelakaan), klaim belum bisa diajukan. Setelah 90 hari, perlindungan berlaku penuh. Jika penyakit kritis disebabkan oleh kecelakaan, tidak ada periode eliminasi.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-question">Apa yang terjadi di usia 85 tahun?</span>
+          <span class="faq-icon">&#43;</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">Jika Anda masih hidup dan tidak pernah mengajukan klaim penyakit kritis tahap lanjut hingga usia 85, Anda akan menerima End of Term Benefit berupa 100% Uang Pertanggungan + Tambahan Nilai Tunai (bonus non-guaranteed). Ini berarti premi Anda tidak hilang percuma meskipun Anda tidak pernah sakit kritis.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-question">Apakah bisa klaim lebih dari satu kali?</span>
+          <span class="faq-icon">&#43;</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">Untuk Plan 2: Ya, Anda bisa klaim penyakit kritis tahap awal terlebih dahulu (25% UP), kemudian jika terdiagnosis penyakit kritis tahap lanjut, Anda masih bisa klaim sisa UP. Cancer UP Renewal juga memberikan tambahan UP jika terdiagnosis kanker. Untuk Plan 1: Klaim penyakit kritis tahap lanjut mengakhiri polis.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-question">Apa itu manfaat akselerasi vs manfaat tambahan?</span>
+          <span class="faq-icon">&#43;</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">Manfaat akselerasi berarti pembayaran klaim mengurangi Uang Pertanggungan yang tersisa. Contoh: UP 1 Miliar, klaim penyakit tahap awal 25% = Rp 250 juta dibayarkan, sisa UP menjadi 750 juta. Manfaat tambahan (additional) seperti Cancer UP Renewal dibayar di atas UP yang tersisa tanpa menguranginya.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-question">Apa itu Regular Premium (RP)?</span>
+          <span class="faq-icon">&#43;</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">Regular Premium (RP) berarti membayar premi secara terus-menerus sampai usia 85 tahun. Berbeda dengan MPP 10/15/20 dimana Anda hanya bayar premi selama periode tersebut. Keuntungan RP: premi per tahun lebih rendah. Kekurangan: total premi yang dibayar bisa lebih besar karena periode bayar lebih lama.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-question">Bagaimana cara mengajukan klaim MCCP?</span>
+          <span class="faq-icon">&#43;</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">Untuk mengajukan klaim: (1) Hubungi agen atau kantor Manulife terdekat. (2) Siapkan dokumen: surat diagnosis dari dokter spesialis, hasil pemeriksaan medis, formulir klaim, dan fotokopi polis. (3) Serahkan dokumen lengkap. (4) Tim klaim Manulife akan memproses dalam 14-30 hari kerja. Tidak ada Survival Period, jadi klaim bisa langsung diproses setelah diagnosis.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-question">Berapa minimum Uang Pertanggungan MCCP?</span>
+          <span class="faq-icon">&#43;</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">Minimum Uang Pertanggungan (UP) untuk MCCP adalah Rp 200.000.000 (dua ratus juta rupiah). Pilihan UP yang tersedia di kalkulator mulai dari 500 Juta hingga 10 Miliar. Semakin besar UP, semakin besar perlindungan, namun premi juga lebih tinggi.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-trigger" aria-expanded="false">
+          <span class="faq-question">Bagaimana dengan kondisi pre-existing (sudah ada sebelumnya)?</span>
+          <span class="faq-icon">&#43;</span>
+        </button>
+        <div class="faq-body">
+          <div class="faq-answer">Kondisi kesehatan yang sudah ada sebelum polis aktif harus dideklarasikan saat pengajuan. Jika tidak mendeklarasikan kondisi yang sudah ada dan kemudian mengajukan klaim terkait, klaim dapat ditolak. Selalu jujur dalam mengisi formulir kesehatan untuk melindungi hak klaim Anda di masa depan.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section mccp-cta">
+  <div class="container" style="position:relative;z-index:1;text-align:center">
+    <h2 class="cta-title fade-up">Apakah Anda Sudah Memiliki <span style="color:#FFB800">Perlindungan Penyakit Kritis</span> yang Memadai?</h2>
+    <p class="cta-sub fade-up stagger-1">Jangan tunggu sampai terlambat. MCCP melindungi 150 penyakit kritis hingga usia 85 tahun, tanpa survival period. Konsultasi gratis untuk mengetahui plan dan premi yang tepat untuk Anda.</p>
+    <div class="cta-btns fade-up stagger-2">
+      <a href="https://wa.me/6287781896087?text=Halo%20Kak%2C%20aku%20mau%20tanya%20soal%20MCCP%20Manulife%20Critical%20Care%20Protection"
+         target="_blank" class="btn btn--lg" style="background:#fff;color:var(--mccp-green);box-shadow:0 4px 20px rgba(0,0,0,0.15)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Konsultasi Gratis via WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="/assets/mccp-premi.js"></script>
+<script>
+// === MCCP Premium Calculator ===
+
+function mccpInit() {
+  var ageSelect = document.getElementById('mccp-age');
+  ageSelect.innerHTML = '';
+  for (var i = 0; i <= 60; i++) {
+    var opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = i + ' tahun';
+    ageSelect.appendChild(opt);
+  }
+  ageSelect.value = '30';
+  mccpCalc();
+}
+
+function mccpFormatRupiah(juta) {
+  var rupiah = Math.round(juta * 1000000);
+  var str = rupiah.toString();
+  var result = '';
+  var count = 0;
+  for (var i = str.length - 1; i >= 0; i--) {
+    result = str[i] + result;
+    count++;
+    if (count % 3 === 0 && i > 0) result = '.' + result;
+  }
+  return 'Rp ' + result;
+}
+
+function mccpCalc() {
+  var plan = document.getElementById('mccp-plan').value;
+  var gender = document.getElementById('mccp-gender').value;
+  var age = document.getElementById('mccp-age').value;
+  var mpp = document.getElementById('mccp-mpp').value;
+  var up = document.getElementById('mccp-up').value;
+
+  var premiumEl = document.getElementById('mccp-premium');
+  var detailEl = document.getElementById('mccp-detail');
+  var modesEl = document.getElementById('mccp-modes');
+  var naEl = document.getElementById('mccp-na');
+  var warningEl = document.getElementById('mccp-warning');
+  var profileEl = document.getElementById('mccp-profile');
+
+  // Build lookup key
+  var key = plan + '|' + gender + '|' + age + '|' + mpp;
+
+  // Update profile summary
+  var planNames = { '1': 'Plan 1 (Basic - 85 Penyakit)', '2': 'Plan 2 (Complete - 150 Penyakit)' };
+  var genderName = gender === 'pria' ? 'Pria' : 'Wanita';
+  var upLabels = { '0.5M': '500 Juta', '1M': '1 Miliar', '1.5M': '1.5 Miliar', '2M': '2 Miliar', '2.5M': '2.5 Miliar', '5M': '5 Miliar', '10M': '10 Miliar' };
+  var mppLabels = { '10': '10 Tahun', '15': '15 Tahun', '20': '20 Tahun', 'RP': 'Regular Premium' };
+  profileEl.innerHTML = '<strong>' + planNames[plan] + '</strong> | ' + genderName + ', Usia ' + age + ' tahun | UP ' + (upLabels[up] || up) + ' | MPP: ' + (mppLabels[mpp] || mpp);
+
+  var record = MCCP_PREMIUM_DATA[key];
+
+  if (!record) {
+    premiumEl.textContent = '-';
+    detailEl.textContent = 'Data tidak ditemukan untuk kombinasi ini';
+    modesEl.style.display = 'none';
+    naEl.style.display = 'block';
+    warningEl.style.display = 'none';
+    return;
+  }
+
+  var value = record[up];
+
+  if (!value || value === '-' || value === null || value === undefined) {
+    premiumEl.textContent = '-';
+    detailEl.textContent = '';
+    modesEl.style.display = 'none';
+    naEl.style.display = 'block';
+    warningEl.style.display = 'none';
+    return;
+  }
+
+  naEl.style.display = 'none';
+
+  var tahunan = parseFloat(value);
+
+  // Payment frequency breakdown
+  var semesteran = tahunan * 0.52;
+  var kuartalan = tahunan * 0.27;
+  var bulanan = tahunan * 0.09;
+
+  premiumEl.textContent = mccpFormatRupiah(tahunan) + '/tahun';
+  detailEl.textContent = '(' + tahunan.toFixed(1) + ' Juta/tahun)';
+
+  modesEl.style.display = 'grid';
+  document.getElementById('mccp-mode-tahunan').textContent = mccpFormatRupiah(tahunan);
+  document.getElementById('mccp-mode-semesteran').textContent = mccpFormatRupiah(semesteran);
+  document.getElementById('mccp-mode-kuartalan').textContent = mccpFormatRupiah(kuartalan);
+  document.getElementById('mccp-mode-bulanan').textContent = mccpFormatRupiah(bulanan);
+
+  // Validate minimum premium Rp 5 juta
+  if (tahunan < 5) {
+    warningEl.style.display = 'block';
+  } else {
+    warningEl.style.display = 'none';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  mccpInit();
+});
+</script>
+<script src="/assets/main.js"></script>
+</body>
+</html>

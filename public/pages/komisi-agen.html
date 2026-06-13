@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Komisi Agen — Tabel Komisi & Income Agen | PastiJaga</title>
+  <meta name="description" content="Detail lengkap tabel komisi agen Manulife: FYC, Renewal, Override, Persistency Factor, dan perhitungan APE.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/assets/style.css">
+  <script>
+    (function(){var t=localStorage.getItem('pcTheme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark');})();
+  </script>
+  <style>
+    /* ── KOMISI PAGE EXTRAS ── */
+    .komisi-hero {
+      background: linear-gradient(135deg, #0D1B2A 0%, #162638 100%);
+      padding: clamp(80px, 10vw, 120px) 0 clamp(40px, 6vw, 60px);
+    }
+    .komisi-hero-title {
+      font-family: var(--ff-head);
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: var(--sp-3);
+    }
+
+    /* Auth */
+    .auth-box {
+      max-width: 400px;
+      margin: 60px auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: var(--sp-8);
+      text-align: center;
+    }
+    .auth-box h2 {
+      font-family: var(--ff-head);
+      font-size: var(--fs-xl);
+      color: var(--txt-head);
+      margin-bottom: var(--sp-3);
+    }
+    .auth-box p {
+      font-size: var(--fs-sm);
+      color: var(--txt-sub);
+      margin-bottom: var(--sp-5);
+    }
+    .auth-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      background: var(--bg);
+      color: var(--txt);
+      font-size: var(--fs-sm);
+      font-family: var(--ff-body);
+      margin-bottom: var(--sp-4);
+      text-align: center;
+    }
+    .auth-input:focus {
+      outline: none;
+      border-color: var(--jade);
+    }
+    .auth-error {
+      color: #ef4444;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      margin-bottom: var(--sp-3);
+      display: none;
+    }
+
+
+  </style>
+</head>
+<body>
+<div id="site-header"></div>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<section class="komisi-hero">
+  <div class="container" style="position:relative;z-index:1">
+    <nav class="breadcrumb" style="margin-bottom:var(--sp-6)">
+      <a href="/index.html" style="color:rgba(255,255,255,0.5)">Beranda</a>
+      <span class="breadcrumb-sep" style="color:rgba(255,255,255,0.3)">&rsaquo;</span>
+      <a href="/pages/rekrutmen-agen.html" style="color:rgba(255,255,255,0.5)">Rekrutmen</a>
+      <span class="breadcrumb-sep" style="color:rgba(255,255,255,0.3)">&rsaquo;</span>
+      <span class="breadcrumb-current">Komisi Agen</span>
+    </nav>
+    <h1 class="komisi-hero-title">Tabel Komisi &amp; Income Agen</h1>
+    <p style="color:rgba(255,255,255,0.7);font-size:var(--fs-md);max-width:600px">
+      Data komisi resmi untuk agen Manulife Indonesia. Halaman ini dilindungi password.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     AUTH GATE
+═══════════════════════════════════════════ -->
+<div id="authGate">
+  <div class="auth-box">
+    <h2>🔒 Halaman Terkunci</h2>
+    <p>Masukkan password untuk melihat data komisi.</p>
+    <div class="auth-error" id="authError">Password salah</div>
+    <input type="password" class="auth-input" id="authPassword" placeholder="Masukkan password">
+    <button class="btn btn--jade btn--block" id="authBtn">Masuk</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PROTECTED CONTENT
+═══════════════════════════════════════════ -->
+<div id="protectedContent" style="display:none">
+
+<section class="section">
+  <div class="container">
+    <div class="auth-box" style="max-width:600px;margin:40px auto">
+      <h2 style="margin-bottom:var(--sp-4)">&#128204; Tabel Komisi Telah Dipindahkan</h2>
+      <p style="font-size:var(--fs-md);color:var(--txt-sub);margin-bottom:var(--sp-5)">
+        Tabel komisi dan kalkulator income telah dipindahkan ke halaman <strong>Agen Tools</strong> untuk akses yang lebih mudah bersama tools lainnya.
+      </p>
+      <a href="/pages/agen-tools.html" class="btn btn--jade btn--lg">Buka Halaman Agen Tools &rarr;</a>
+    </div>
+  </div>
+</section>
+
+</div><!-- /protectedContent -->
+
+<div id="site-footer"></div>
+
+<!-- NOTE: This password protection is intentionally a client-side "soft lock" to discourage
+     casual visitors from accessing internal commission data. It is NOT a security measure.
+     Anyone with basic browser knowledge can bypass it. This is acceptable per requirements
+     since the data is not truly confidential, just not meant for public-facing display. -->
+<script>
+(function() {
+  var PASSWORD = 'petrusjakub';
+
+  function checkAuth() {
+    if (sessionStorage.getItem('pc_komisi_auth') === 'true') {
+      showContent();
+    }
+  }
+
+  function showContent() {
+    document.getElementById('authGate').style.display = 'none';
+    document.getElementById('protectedContent').style.display = 'block';
+  }
+
+  function handleLogin() {
+    var input = document.getElementById('authPassword').value;
+    if (input === PASSWORD) {
+      sessionStorage.setItem('pc_komisi_auth', 'true');
+      showContent();
+    } else {
+      document.getElementById('authError').style.display = 'block';
+    }
+  }
+
+  document.getElementById('authBtn').addEventListener('click', handleLogin);
+  document.getElementById('authPassword').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') handleLogin();
+  });
+
+  checkAuth();
+})();
+</script>
+<script src="/assets/main.js"></script>
+</body>
+</html>
