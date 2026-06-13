@@ -1,5 +1,5 @@
 /* ============================================================
-   PASTIJAGA — LEAD GENERATION MODULE
+   BIJAKFINANCIAL — LEAD GENERATION MODULE
    Pop-up CTA | Exit Intent | Contextual Messages
    ============================================================ */
 
@@ -7,7 +7,7 @@
   'use strict';
 
   /* ── CONFIG ── */
-  const WA_NUMBER = '6287781896087';
+  const WA_NUMBER = '6287870862057';
   const WA_BASE   = 'https://wa.me/' + WA_NUMBER + '?text=';
 
   const POPUP_CTA_KEY     = 'pc_popup_cta_shown';
@@ -40,7 +40,7 @@
     '/pages/rekrutmen-agen.html':     'Halo, saya tertarik untuk bergabung sebagai agen Manulife. Bisa dibantu?'
   };
 
-  const DEFAULT_MESSAGE = 'Halo, saya dari website PastiJaga. Bisa konsultasi soal asuransi?';
+  const DEFAULT_MESSAGE = 'Halo, saya dari website BijakFinancial. Bisa konsultasi soal asuransi?';
 
   /* ── HELPERS ── */
   function getContextualMessage() {

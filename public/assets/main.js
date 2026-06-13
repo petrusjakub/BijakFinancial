@@ -1,5 +1,5 @@
 /* ============================================================
-   PASTIJAGA — MAIN JS
+   BIJAKFINANCIAL — MAIN JS
    Dark Mode | Component Loader | Search | Scroll | Nav
    ============================================================ */
 
@@ -7,9 +7,9 @@
   'use strict';
 
   /* ── CONFIG ── */
-  const WA_NUMBER = '6287781896087';
-  const INSTAGRAM = 'https://instagram.com/petrusjakub';
-  const EMAIL     = 'petrusjakub.asn@gmail.com';
+  const WA_NUMBER = '6287870862057';
+  const INSTAGRAM = '';
+  const EMAIL     = 'wijedy21@gmail.com';
 
   /* ── PRODUCT INDEX (for search) ── */
   const PRODUCTS = [
@@ -39,7 +39,7 @@
     /* Spesial */
     { name: 'Magna Sehat Premium', full: 'Asuransi Keluarga maks 5 orang, mulai 4jt/tahun', cat: 'Spesial', icon: '⭐', url: '/pages/magna-sehat-premium.html' },
     /* Info */
-    { name: 'Tentang', full: 'Tentang PastiJaga & Agen', cat: 'Info', icon: 'ℹ️', url: '/pages/tentang.html' },
+    { name: 'Tentang', full: 'Tentang BijakFinancial & Agen', cat: 'Info', icon: 'ℹ️', url: '/pages/tentang.html' },
     { name: 'Bisnis',  full: 'Peluang Bisnis Asuransi',     cat: 'Info', icon: '💼', url: '/pages/bisnis.html' },
     { name: 'Rekrutmen Agen', full: 'Bergabung Menjadi Agen Manulife', cat: 'Info', icon: '🤝', url: '/pages/rekrutmen-agen.html' },
     { name: 'Komisi Agen', full: 'Tabel Komisi & Income Agen', cat: 'Info', icon: '💰', url: '/pages/komisi-agen.html' },
